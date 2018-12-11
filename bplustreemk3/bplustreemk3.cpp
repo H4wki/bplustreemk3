@@ -15,7 +15,7 @@ bplustreemk3::bplustreemk3(int blockSize) {
 	this->rbnAvailList = 9;
 	this->sizeofRecords = 10;
 	this->numFieldsPerRecord = 11;
-	this->root = block(this->blockSize, NULL);
+	this->root = block(this->blockSize, NULL,7);
 }
 bplustreemk3::bplustreemk3()
 {
@@ -32,7 +32,7 @@ bplustreemk3::bplustreemk3()
 	this->rbnAvailList = 9;
 	this->sizeofRecords = 10;
 	this->numFieldsPerRecord = 11;
-	this->root = block(this->blockSize, NULL);
+	this->root = block(this->blockSize, NULL,0);
 	block::blockList.push_back(root);
 	//this->pToRoot = &root;
 
@@ -40,52 +40,15 @@ bplustreemk3::bplustreemk3()
 int bplustreemk3::size() {
 	return this->totalNumRecords;
 }
-block bplustreemk3::recursivSearch(vector<block> searchE, int item, int num) {
-	if ((searchE.at(num).items.size() + 1) < this->blockSize){
-		return searchE.at(num);
-	}
-	else {
-		return this->recursivSearch(searchE.at(num).children, item, num);
-	}
-	return  block(3,NULL);
-}
 bool bplustreemk3::insert(int insertE) {
-	for (int i = 0; i < this->blockList.size; i++) {
-		if ((this->blockList.at(i).items.size()+1)<this->blockSize) {
-			if (this->blockList.at(i).items.front > this->blockList.at(i).getParent()->items.back && insertE > this->blockList.at(i).getParent()->items.back) {
-				this->blockList.at(i).add(insertE);
-				return true;
-			}
-			if (this->blockList.at(i).items.back < this->blockList.at(i).getParent()->items.front && insertE < this->blockList.at(i).getParent()->items.front) {
-				this->blockList.at(i).add(insertE);
-				return true;
-			}
-			
-		}
-		else {
-			if (this->blockList.at(i).items.front > this->blockList.at(i).getParent()->items.back && insertE > this->blockList.at(i).getParent()->items.back) {
-				vector<int> orignal=this->blockList.at(i).items.;
-				vector<int> newStuff;
-				while (true) {
-					
-				}
-			}
-			if (this->blockList.at(i).items.back < this->blockList.at(i).getParent()->items.front && insertE < this->blockList.at(i).getParent()->items.front) {
-				
+	int lookingL=0;
+	for (int i = 0; i < this->blockList.size(); i++) {
+		if (this->blockList.at(i).level == lookingL) {
+			if (this->blockList.at(i).items.size() + 1 < this->blockSize) {
+				this->blockList.at(i).add(i);
 			}
 		}
 	}
-	
-	/*if ((root.items.size()+1)<this->blockSize) {
-		root.add(insertE);
-		return true;
-	}
-	else {
-		for (int i = 0; i < this->blockList.size(); i++) {
-			if()
-		}
-	}
-	this->totalNumRecords++;*/
 	return false;
 }
 bool bplustreemk3::remove() {

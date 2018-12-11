@@ -10,19 +10,23 @@ struct block {
 	block* parent;
 	vector<int> items;
 	int size;
+	int level;
+	int largestV;
 	static vector<block> blockList;
 
 	block() {
 
 	}
-	block(int intSize, block* par) {
+	block(int intSize, block* par,int level) {
 		this->parent = par;
 		this->size = intSize;
+		this->level = level;
 	}
-	block(int intSize, block* par, int item) {
+	block(int intSize, block* par, int item,int level) {
 		this->parent = par;
 		this->size = intSize;
 		this->add(item);
+		this->level = level;
 	}
 	vector<block> getChildren() {
 		return this->children;
@@ -40,6 +44,7 @@ struct block {
 			return true;
 		}
 		this->items.push_back(newItem);
+		this->largestV = this->items.back;
 		return true;
 	}
 	bool remove(int delItem) {
@@ -67,6 +72,9 @@ struct block {
 				}
 			}
 		}
+	}
+	int bigestV() {
+		return items.back;
 	}
 	void toString() {
 
@@ -120,5 +128,4 @@ class bplustreemk3 {
 		bool headerToFile();
 		int getBlockSize();
 		void toString();
-		block recursivSearch(vector<block> searchE,int item,int num);
 };
