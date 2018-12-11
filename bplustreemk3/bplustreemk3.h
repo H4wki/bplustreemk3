@@ -4,9 +4,9 @@
 #include <iostream>
 
 using namespace std;
-
+struct block;
 struct block {
-	vector<block>* children;//pointer to the children
+	vector<block> children;//pointer to the children
 	block* parent;
 	vector<int> items;
 	int size;
@@ -25,7 +25,7 @@ struct block {
 		this->size = intSize;
 		this->add(item);
 	}
-	vector<block>* getChildren() {
+	vector<block> getChildren() {
 		return this->children;
 	}
 	block* getParent() {
@@ -57,13 +57,15 @@ struct block {
 		this->parent = newRoot;
 	}
 	void addChild(block newChild) {
-		this->children->push_back(newChild);
+		this->children.push_back(newChild);
 	}
 	void removeChild(block removeB) {
-		for (int i = 0; i < this->children->size(); i++) {
-			block temp = this->children->at(i);
-			if (temp == removeB) {
-				this->children->erase(children->begin()+i);
+		for (int i = 0; i < this->children.size(); i++) {
+			block temp = this->children.at(i);
+			for (int x = 0; x < removeB.items.size(); x++) {
+				if (temp.items.at(i) == removeB.items.at(i)) {
+					temp.items.erase(temp.items.begin() + i);
+				}
 			}
 		}
 	}
@@ -76,15 +78,15 @@ struct block {
 	}
 
 };
-bool operator ==(block a, block b) {
-	if (a.items.size() != b.items.size()) { return false; }
-	for (int i = 0; i < a.size; i++) {
-		if (a.items.at(i) != b.items.at(i)) {
-			return false;
-		}
-	}
-	return true;
-}
+//bool operator ==(block a, block b) {
+//	if (a.items.size() != b.items.size()) { return false; }
+//	for (int i = 0; i < a.items.size(); i++) {
+//		if (a.items.at(i) != b.items.at(i)) {
+//			return false;
+//		}
+//	}
+//	return true;
+//}
 
 class bplustreemk3 {
 	private:
@@ -109,6 +111,7 @@ class bplustreemk3 {
 		string lastMod;
 	public:
 		bplustreemk3();
+		bplustreemk3(int blockSize);
 		bool insert(int insertE);
 		bool remove();
 		bool checkEmpty();
@@ -116,5 +119,6 @@ class bplustreemk3 {
 		int size();
 		bool headerToFile();
 		int getBlockSize();
+		void toString();
 		block recursivSearch(vector<block> searchE,int item,int num);
 };
