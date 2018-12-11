@@ -10,7 +10,7 @@ struct block {
 	block* parent;
 	vector<int> items;
 	int size;
-
+	static vector<block> blockList;
 
 	block() {
 
@@ -18,7 +18,6 @@ struct block {
 	block(int intSize, block* par) {
 		this->parent = par;
 		this->size = intSize;
-
 	}
 	block(int intSize, block* par, int item) {
 		this->parent = par;
@@ -103,6 +102,7 @@ class bplustreemk3 {
 		int sizeofRecords;
 		int numFieldsPerRecord;
 		block root;
+		vector<block> blockList;
 
 		//block* pToRoot;
 		//String variable

@@ -5,7 +5,7 @@ using namespace std;
 bplustreemk3::bplustreemk3(int blockSize) {
 	this->headerSize = 0;
 	this->blockSize = blockSize;
-	this->totalNumRecords = 2;
+	this->totalNumRecords = 0;
 	this->blockSize = 3;
 	this->totalBlocks = 1;
 	this->numAvalBlocks = 5;
@@ -33,6 +33,7 @@ bplustreemk3::bplustreemk3()
 	this->sizeofRecords = 10;
 	this->numFieldsPerRecord = 11;
 	this->root = block(this->blockSize, NULL);
+	block::blockList.push_back(root);
 	//this->pToRoot = &root;
 
 }
@@ -49,12 +50,42 @@ block bplustreemk3::recursivSearch(vector<block> searchE, int item, int num) {
 	return  block(3,NULL);
 }
 bool bplustreemk3::insert(int insertE) {
-	if ((root.items.size()+1)<this->blockSize) {
+	for (int i = 0; i < this->blockList.size; i++) {
+		if ((this->blockList.at(i).items.size()+1)<this->blockSize) {
+			if (this->blockList.at(i).items.front > this->blockList.at(i).getParent()->items.back && insertE > this->blockList.at(i).getParent()->items.back) {
+				this->blockList.at(i).add(insertE);
+				return true;
+			}
+			if (this->blockList.at(i).items.back < this->blockList.at(i).getParent()->items.front && insertE < this->blockList.at(i).getParent()->items.front) {
+				this->blockList.at(i).add(insertE);
+				return true;
+			}
+			
+		}
+		else {
+			if (this->blockList.at(i).items.front > this->blockList.at(i).getParent()->items.back && insertE > this->blockList.at(i).getParent()->items.back) {
+				vector<int> orignal=this->blockList.at(i).items.;
+				vector<int> newStuff;
+				while (true) {
+					
+				}
+			}
+			if (this->blockList.at(i).items.back < this->blockList.at(i).getParent()->items.front && insertE < this->blockList.at(i).getParent()->items.front) {
+				
+			}
+		}
+	}
+	
+	/*if ((root.items.size()+1)<this->blockSize) {
 		root.add(insertE);
+		return true;
 	}
 	else {
-		
+		for (int i = 0; i < this->blockList.size(); i++) {
+			if()
+		}
 	}
+	this->totalNumRecords++;*/
 	return false;
 }
 bool bplustreemk3::remove() {
@@ -77,5 +108,8 @@ int bplustreemk3::getBlockSize() {
 	return this->blockSize;
 }
 void bplustreemk3::toString() {
-	cout << this->root.items.front() << endl;
+	for (int i = 0; i < this->blockSize;i++) {
+		cout << root.items.at(i) << endl;
+	}
+	
 }
