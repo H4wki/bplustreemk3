@@ -44,7 +44,7 @@ struct block {
 			return true;
 		}
 		this->items.push_back(newItem);
-		this->largestV = this->items.back;
+		this->largestV = this->items.back();
 		return true;
 	}
 	bool remove(int delItem) {
@@ -74,7 +74,7 @@ struct block {
 		}
 	}
 	int bigestV() {
-		return items.back;
+		return items.back();
 	}
 	void toString() {
 

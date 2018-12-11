@@ -41,14 +41,18 @@ int bplustreemk3::size() {
 	return this->totalNumRecords;
 }
 bool bplustreemk3::insert(int insertE) {
-	int lookingL=0;
-	for (int i = 0; i < this->blockList.size(); i++) {
-		if (this->blockList.at(i).level == lookingL) {
-			if (this->blockList.at(i).items.size() + 1 < this->blockSize) {
-				this->blockList.at(i).add(i);
-			}
+	 
+	/*for (int i = 0; i < this->blockList.size() ; i++) {
+		if (this->blockList.at(i).items.size()+1<this->blockSize) {
+			this->blockList.at(i).add(insertE);
+			return true;
 		}
-	}
+		else if (this->blockList.at(i).largestV>insertE && this->blockList.at(i).items.size < this->blockSize) {
+			block temp1;
+			int x, y;
+			x=this->blockList.at(i).items.front
+		}
+	 }*/
 	return false;
 }
 bool bplustreemk3::remove() {
