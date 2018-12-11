@@ -20,6 +20,11 @@ struct block {
 		this->size = intSize;
 
 	}
+	block(int intSize, block* par, int item) {
+		this->parent = par;
+		this->size = intSize;
+		this->add(item);
+	}
 	vector<block>* getChildren() {
 		return this->children;
 	}
@@ -56,8 +61,9 @@ struct block {
 	}
 	void removeChild(block removeB) {
 		for (int i = 0; i < this->children->size(); i++) {
-			if (this->children->at(i) == removeB) {
-				this->children->erase(children->begin+i);
+			block temp = this->children->at(i);
+			if (temp == removeB) {
+				this->children->erase(children->begin()+i);
 			}
 		}
 	}
@@ -71,7 +77,7 @@ struct block {
 
 };
 bool operator ==(block a, block b) {
-	if (a.size != b.size) { return false; }
+	if (a.items.size() != b.items.size()) { return false; }
 	for (int i = 0; i < a.size; i++) {
 		if (a.items.at(i) != b.items.at(i)) {
 			return false;
@@ -95,6 +101,8 @@ class bplustreemk3 {
 		int sizeofRecords;
 		int numFieldsPerRecord;
 		block root;
+
+		//block* pToRoot;
 		//String variable
 		string description;
 		string time;
@@ -108,4 +116,5 @@ class bplustreemk3 {
 		int size();
 		bool headerToFile();
 		int getBlockSize();
+		block recursivSearch(vector<block> searchE,int item,int num);
 };
