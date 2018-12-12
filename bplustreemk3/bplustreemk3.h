@@ -9,22 +9,22 @@ struct block {
 	vector<block> children;//pointer to the children
 	block* parent;
 	vector<int> items;
-	int size;
+	int maxSize;
 	int level;
 	int largestV;
-	static vector<block> blockList;
+	//static vector<block> blockList;
 
 	block() {
 
 	}
 	block(int intSize, block* par, int level) {
 		this->parent = par;
-		this->size = intSize;
+		this->maxSize = intSize;
 		this->level = level;
 	}
 	block(int intSize, block* par, int item, int level) {
 		this->parent = par;
-		this->size = intSize;
+		this->maxSize = intSize;
 		this->add(item);
 		this->level = level;
 	}
@@ -35,7 +35,7 @@ struct block {
 		return this->parent;
 	}
 	bool add(int newItem) {
-		if (items.size() == this->size) { return false; }
+		if (items.size() == this->maxSize) { return false; }
 		for (int i = 0; i < items.size(); i++) {
 			if (items.at(i) < newItem) {
 				continue;
@@ -75,6 +75,12 @@ struct block {
 	}
 	int bigestV() {
 		return items.back();
+	}
+	int size() {
+		return items.size();
+	}
+	int getLevel() {
+		return level;
 	}
 	void toString() {
 
@@ -121,9 +127,9 @@ public:
 	bplustreemk3();
 	bplustreemk3(int blockSize);
 	bool insert(int insertE);
-	bool remove();
+	bool remove(int item);
 	bool checkEmpty();
-	bool isPresent();
+	bool isPresent(int lookup);
 	int size();
 	bool headerToFile();
 	int getBlockSize();
