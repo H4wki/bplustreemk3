@@ -17,12 +17,12 @@ struct block {
 	block() {
 
 	}
-	block(int intSize, block* par,int level) {
+	block(int intSize, block* par, int level) {
 		this->parent = par;
 		this->size = intSize;
 		this->level = level;
 	}
-	block(int intSize, block* par, int item,int level) {
+	block(int intSize, block* par, int item, int level) {
 		this->parent = par;
 		this->size = intSize;
 		this->add(item);
@@ -96,36 +96,36 @@ struct block {
 //}
 
 class bplustreemk3 {
-	private:
-		//Header Record Variables
-		int headerSize;
-		int blockSize;
-		int totalBlocks;
-		int numAvalBlocks;//Number of open blocks
-		int numOfLevels;
-		int rbnRoot; //Relative offest to root node
-		int rbnLevels;//Relative offset to levels
-		int rbnAvailList;//Relative offset to the avial list
-		int totalNumRecords;//total number of records
-		int sizeofRecords;
-		int numFieldsPerRecord;
-		block root;
-		vector<block> blockList;
+private:
+	//Header Record Variables
+	int headerSize;
+	int blockSize;
+	int totalBlocks;
+	int numAvalBlocks;//Number of open blocks
+	int numOfLevels;
+	int rbnRoot; //Relative offest to root node
+	int rbnLevels;//Relative offset to levels
+	int rbnAvailList;//Relative offset to the avial list
+	int totalNumRecords;//total number of records
+	int sizeofRecords;
+	int numFieldsPerRecord;
+	block root;
+	vector<block> blockList;
 
-		//block* pToRoot;
-		//String variable
-		string description;
-		string time;
-		string lastMod;
-	public:
-		bplustreemk3();
-		bplustreemk3(int blockSize);
-		bool insert(int insertE);
-		bool remove();
-		bool checkEmpty();
-		bool isPresent();
-		int size();
-		bool headerToFile();
-		int getBlockSize();
-		void toString();
+	//block* pToRoot;
+	//String variable
+	string description;
+	string time;
+	string lastMod;
+public:
+	bplustreemk3();
+	bplustreemk3(int blockSize);
+	bool insert(int insertE);
+	bool remove();
+	bool checkEmpty();
+	bool isPresent();
+	int size();
+	bool headerToFile();
+	int getBlockSize();
+	void toString();
 };

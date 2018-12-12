@@ -15,7 +15,7 @@ bplustreemk3::bplustreemk3(int blockSize) {
 	this->rbnAvailList = 9;
 	this->sizeofRecords = 10;
 	this->numFieldsPerRecord = 11;
-	this->root = block(this->blockSize, NULL,7);
+	this->root = block(this->blockSize, NULL, 7);
 }
 bplustreemk3::bplustreemk3()
 {
@@ -32,7 +32,7 @@ bplustreemk3::bplustreemk3()
 	this->rbnAvailList = 9;
 	this->sizeofRecords = 10;
 	this->numFieldsPerRecord = 11;
-	this->root = block(this->blockSize, NULL,0);
+	this->root = block(this->blockSize, NULL, 0);
 	block::blockList.push_back(root);
 	//this->pToRoot = &root;
 
@@ -41,27 +41,24 @@ int bplustreemk3::size() {
 	return this->totalNumRecords;
 }
 bool bplustreemk3::insert(int insertE) {
-	 
-	/*for (int i = 0; i < this->blockList.size() ; i++) {
-		if (this->blockList.at(i).items.size()+1<this->blockSize) {
+	for (int i =this->blockList.size() ; i >0; i--) {
+		if (this->blockList.at(i).items.size() + 1 < this->blockSize) {
 			this->blockList.at(i).add(insertE);
-			return true;
 		}
-		else if (this->blockList.at(i).largestV>insertE && this->blockList.at(i).items.size < this->blockSize) {
-			block temp1;
-			int x, y;
-			x=this->blockList.at(i).items.front
+		else {
+			//look up the tree back wards via levels
 		}
-	 }*/
+	}
 	return false;
 }
 bool bplustreemk3::remove() {
 	return false;
 }
 bool bplustreemk3::checkEmpty() {
+	if (this->totalNumRecords == 0) { return true; }
 	return false;
 }
-bool bplustreemk3::isPresent() {
+bool bplustreemk3::isPresent(int lookup) {
 	return false;
 }
 bool bplustreemk3::headerToFile() {
@@ -75,8 +72,8 @@ int bplustreemk3::getBlockSize() {
 	return this->blockSize;
 }
 void bplustreemk3::toString() {
-	for (int i = 0; i < this->blockSize;i++) {
+	for (int i = 0; i < this->blockSize; i++) {
 		cout << root.items.at(i) << endl;
 	}
-	
+
 }
